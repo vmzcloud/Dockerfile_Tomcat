@@ -16,6 +16,10 @@ RUN wget --no-check-certificate $TOMCAT_URL
 RUN tar xvfz apache*.tar.gz
 RUN mv apache-tomcat-*/* /opt/tomcat/.
 RUN rm -rf apache*.tar.gz
+RUN rm -rf apache-tomcat-*
+
+RUN rm -rf /opt/tomcat/webapps/docs
+RUN rm -rf /opt/tomcat/webapps/examples
 
 WORKDIR /opt/JDK
 RUN wget --no-check-certificate $JDK_URL
