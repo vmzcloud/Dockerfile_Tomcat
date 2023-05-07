@@ -1,0 +1,40 @@
+FROM alpine:latest as downloader
+
+ENV TOMCAT_URL="https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.74/bin/apache-tomcat-9.0.74.tar.gz"
+ENV JDK_URL="https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.19%2B7/OpenJDK11U-jdk_x64_alpine-linux_hotspot_11.0.19_7.tar.gz"
+
+RUN mkdir /opt/tomcat/
+RUN mkdir /opt/JDK
+
+WORKDIR /opt/tomcat
+RUN wget --no-check-certificate $TOMCAT_URL
+RUN tar xvfz apache*.tar.gz
+RUN mv apache-tomcat-*/* /opt/tomcat/.
+RUN rm -rf apache*.tar.gz
+RUN rm -rf apache-tomcat-*
+
+RUN rm -rf /opt/tomcat/webapps/docs
+RUN rm -rf /opt/tomcat/webapps/examples
+
+WORKDIR /opt/JDK
+RUN wget --no-check-certificate $JDK_URL
+RUN tar xvfz OpenJDK*.tar.gz
+RUN mv jdk-*/* /opt/JDK/.
+RUN rm -rf OpenJDK*.tar.gz
+RUN rm -rf jdk-*
+
+FROM alpine:latest
+
+LABEL maintainer="vmzcloud"
+
+ENV TZ="Asia/Hong_Kong"
+
+EXPOSE 8080
+
+COPY --from=downloader /opt/JDK /opt/JDK
+COPY --from=downloader /opt/tomcat /opt/tomcat
+
+ENV JAVA_HOME=/opt/JDK
+WORKDIR /opt/tomcat/
+
+CMD ["/opt/tomcat/bin/catalina.sh", "run"]
