@@ -9,7 +9,7 @@
 <a href="https://github.com/adoptium/temurin11-binaries/releases" target="_blank">OpenJDK</a>
 
 # DockerHub
-<a href="https://hub.docker.com/repository/docker/vmzcloud/tomcat/general" target="_blank">vmzcloud/tomcat</a><p>
+<a href="https://hub.docker.com/r/vmzcloud/tomcat" target="_blank">vmzcloud/tomcat</a><p>
 
 # Build
 <pre>
