@@ -17,7 +17,7 @@
 </pre>
 ## Example:
 <pre>
-# docker build -f Dockerfile_Tomcat_9.0.74-openjdk_11.0.19_7-alpine -t vmzcloud/tomcat:9.0.74-openjdk_11.0.19_7-alpine .
+# docker build -f Dockerfile_Tomcat_9.0.76-openjdk_11.0.19_7-alpine -t vmzcloud/tomcat:9.0.76-openjdk_11.0.19_7-alpine .
 </pre>
 
 # Tomcat Configuration
@@ -33,7 +33,7 @@ docker run -d \
 -p 8080:8080 \
 -v ${PWD}/webapps:/opt/tomcat/webapps \
 --restart unless-stopped \
-vmzcloud/tomcat:9.0.74-openjdk_11.0.19_7-alpine
+vmzcloud/tomcat:9.0.76-openjdk_11.0.19_7-alpine
 </pre>
 
 # Sample Application for Deploy Test
